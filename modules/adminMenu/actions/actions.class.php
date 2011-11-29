@@ -34,10 +34,10 @@ class adminMenuActions extends autoAdminMenuActions
   {
     $menu = new peanutMenu();       
     $this->form = new peanutMenuForm();       
-    $this->processForm($request, $this->form);                
+    $this->processForm_new($request, $this->form);                
   }
    
-  protected function processForm(sfWebRequest $request, sfForm $form)
+  protected function processForm_new(sfWebRequest $request, sfForm $form)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())

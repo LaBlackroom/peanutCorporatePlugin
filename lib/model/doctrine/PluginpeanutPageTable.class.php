@@ -75,7 +75,8 @@ abstract class PluginpeanutPageTable extends Doctrine_Table
   public function getItemsByMenu($menu, $status = 'publish')
   {
     $p = $this->getItems($status)
-            ->andWhere('m.id = ? OR m.slug = ?', array($menu, $menu));
+            ->andWhere('m.id = ? OR m.slug = ?', array($menu, $menu))
+            ->limit(1);
 
     return $p;
   }

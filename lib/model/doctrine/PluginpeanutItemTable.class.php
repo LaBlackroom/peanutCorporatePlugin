@@ -51,7 +51,8 @@ abstract class PluginpeanutItemTable extends Doctrine_Table
   {
     $p = $this->getItem($type)
             ->leftJoin('p.peanutSeo o')
-            ->andWhere('p.id = ? OR p.slug = ?', array($item, $item));
+            ->andWhere('p.id = ? OR p.slug = ?', array($item, $item))
+            ->limit(1);
 
     return $p;
   }

@@ -1,6 +1,6 @@
 <?php
   use_helper('I18N', 'Date');
-  use_html5_javascript('widget/jquery-ui-1.8.9.custom.min.js');
+  use_html5_javascript('/peanutAssetPlugin/js/widget/jquery-ui-1.8.9.custom.min.js');
   use_html5_javascript('/peanutCorporatePlugin/js/jquery.treeTable.min.js');
   use_html5_stylesheet('/peanutCorporatePlugin/css/jquery.treetable.css');
   include_partial('adminMenu/assets');

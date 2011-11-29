@@ -214,8 +214,8 @@
           <div class="content" id="selectmenu">
             <?php echo $form['menu']->render() ?>
             
-            <a class="ajax" href="<?php echo url_for('adminMenu/newx') ?>">
-              <img title="<?php echo __("Add new menu") ?>" src="/images/admin/add.png" />
+            <a class="ajax" href="/adminMenu/newx">
+              <img title="<?php echo __("Add new menu") ?>" src="/peanutAssetPlugin/images/admin/add.png" />
             </a>
           </div>
           
