@@ -1,6 +1,6 @@
-<?php seo('title', $item) ?>
-<?php seo('description', $item) ?>
-<?php seo('keywords', $item) ?>
+<?php seo('title', $item, $item['title']) ?>
+<?php seo('description', $item, truncate_text(strip_tags(htmlspecialchars_decode($item['content'])), '255')) ?>
+<?php seo('keywords', $item, peanutConfig::get('meta_keywords')) ?>
 <?php seo('index', $item) ?>
 
 <article id="page-<?php echo $item['id'] ?>">
