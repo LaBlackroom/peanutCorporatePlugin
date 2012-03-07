@@ -59,59 +59,63 @@ abstract class PluginpeanutLinkForm extends BasepeanutLinkForm
     ));
 
     $this->widgetSchema['author'] = new sfWidgetFormChoice(array(
-          'choices' => $this->_getUsers()
-      ));
+      'choices' => $this->_getUsers()
+    ));
 
-    }
-    
-    protected function _getUsers()
+  }
+
+  public function doBind(array $values)
+  {
+    $url = ($values['url'] );
+
+    if(preg_match('#^https?://.+#', $url))
     {
-      $users = array();
-      $choices = Doctrine::getTable('sfGuardUser')->getUsersWhereGroupIs('2')->execute();
-
-      foreach($choices as $user)
-      {
-        $users[$user->getId()] = $user->getName();
-      }
-
-      return $users;
-    }
-    
-    public function doBind(array $values) 
-    { 
-      $url = ($values['url'] );
-
-      if(preg_match('#^https?://.+#', $url) ){             
-
       $this->validatorSchema['url'] = new sfValidatorUrl($options = array(
           'required'  => true
         ),$messages = array(
           'required'  => 'Fill this please'
       ));
-
-      }
-      else if(preg_match('#^/.+\.html$#', $url)) {         
-           $this->validatorSchema['url'] = new sfValidatorPass($options = array(
-            'required'  => true
-          ),$messages = array(
-            'required'  => 'Fill this please'
-          ));       
-       }   
-
-      function clearIfMe( $values )
-      {
-        if($values['peanutXfn']['me'] == "on") {              
-          foreach($values['peanutXfn'] as $key => $val){
-            if($key != "me")
-              $values['peanutXfn'][$key] = null;          
-          }     
-        }    
-        return $values['peanutXfn'];
-      }
-
-      $values['peanutXfn'] = clearIfMe($values);
-
-      parent::doBind($values); 
     }
+    elseif(preg_match('#^/.+\.html$#', $url))
+    {
+      $this->validatorSchema['url'] = new sfValidatorPass($options = array(
+        'required'  => true
+      ),$messages = array(
+        'required'  => 'Fill this please'
+      ));
+    }
+
+    if(array_key_exists('peanutXfn', $values))
+    {
+      $values['peanutXfn'] = $this->_clearIfMe($values);
+    }
+
+    parent::doBind($values);
+  }
+
+  protected function _getUsers()
+  {
+    $users = array();
+    $choices = Doctrine::getTable('sfGuardUser')->getUsersWhereGroupIs('2')->execute();
+
+    foreach($choices as $user)
+    {
+      $users[$user->getId()] = $user->getName();
+    }
+
+    return $users;
+  }
+
+  protected function _clearIfMe($values)
+  {
+    if($values['peanutXfn']['me'] == "on") {
+      foreach($values['peanutXfn'] as $key => $val){
+        if($key != "me")
+          $values['peanutXfn'][$key] = null;
+      }
+    }
+
+    return $values['peanutXfn'];
+  }
   
 }
