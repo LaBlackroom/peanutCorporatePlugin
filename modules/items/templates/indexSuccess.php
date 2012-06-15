@@ -1,5 +1,6 @@
-<article id="page-<?php echo $item['id'] ?>">
-
+<?php include_partial('public/header', array('vars' => $varHeader)) ?>
+<article id="page-<?php echo $item['id'] ?>" class="<?php echo $template ?>">
+  
   <header>
     <h1>
         <a
@@ -21,3 +22,4 @@
   </footer>
 
 </article>
+<?php include_partial('public/footer', array('vars' => $varFooter)) ?>

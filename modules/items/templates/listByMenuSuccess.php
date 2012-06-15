@@ -1,5 +1,5 @@
 <?php use_helper('Text') ?>
-
+<?php include_partial('public/header', array('vars' => $varHeader)) ?>
 <section>
 
   <h1><?php echo __('Last entries for menu %s', array('%s' => $items[0]['peanutMenu']['name']), 'peanutCorporate') ?></h1>
@@ -11,7 +11,7 @@
   <?php else: ?>
   <?php foreach($items as $item): ?>
 
-  <article id="page-<?php echo $item['id'] ?>">
+  <article id="page-<?php echo $item['id'] ?>" class="<?php echo $template ?>">
 
     <header>
       <h1>
@@ -45,3 +45,4 @@
   <?php endif; ?>
 
 </section>
+<?php include_partial('public/footer', array('vars' => $varFooter)) ?>

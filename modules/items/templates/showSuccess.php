@@ -3,7 +3,9 @@
 <?php seo('keywords', $item, peanutConfig::get('meta_keywords')) ?>
 <?php seo('index', $item) ?>
 
-<article id="page-<?php echo $item['id'] ?>">
+<?php include_partial('public/header', array('vars' => $varHeader)) ?>
+
+<article id="page-<?php echo $item['id'] ?>" class="<?php echo $template ?>">
 
   <header>
     <h1><?php echo htmlentities($item['title']) ?></h1>
@@ -19,3 +21,4 @@
   </footer>
   
 </article>
+<?php include_partial('public/footer', array('vars' => $varFooter)) ?>
