@@ -4,7 +4,7 @@ jQuery(document).ready( function () {
  
     jQuery("#ajax").submit( function (){      
       
-       jQuery.post( "<?php echo url_for('adminMenu/ajax') ?>",   
+       jQuery.post( "<?php echo url_for('adminCategories/ajax') ?>",   
            jQuery('#ajax').serialize()  , function success(data){        
               if(data){  
               jQuery("#selectmenu select").remove();
@@ -19,7 +19,7 @@ jQuery(document).ready( function () {
 })
 </script>
 
-<form id="ajax" action="<?php echo url_for('adminMenu/ajax', array('sf_format' => 'html')) ?>" method="POST">
+<form id="ajax" action="<?php echo url_for('adminCategories/ajax', array('sf_format' => 'html')) ?>" method="POST">
         <?php  echo $form->renderHiddenFields() ?> 
         <p> 
          <?php echo $form['name']->renderLabel() ?> <br />

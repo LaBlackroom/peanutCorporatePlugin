@@ -1,7 +1,20 @@
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
+<?php $lang = unserialize(peanutConfig::get('lang')); ?>
+
 <div class="sf_admin_form">
+  
+  <section class="language clearfix">
+      <ul>
+        <?php if($lang['lang']){ ?>
+          <?php foreach($lang['lang'] as $key => $value){ ?>
+            <li class="<?php echo strtolower($value) ?>" title="<?php echo __(strtolower($value)) ?>"><?php echo $value ?></li>
+          <?php }}else{ ?>
+            <li class="fr">FR</li>
+          <?php } ?>
+      </ul>
+    </section>
   
   <?php echo form_tag_for($form, '@peanut_page') ?>
     <?php echo $form->renderHiddenFields(false) ?>
@@ -16,30 +29,57 @@
       </div>
       
       <div class="content_box_content clearfix">
-        <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_title">
-          <?php echo $form['title']->renderLabel() ?>
-          
-          <div class="content">
-            <?php echo $form['title']->render() ?>
-          </div>
-          
-          <div class="help">
-            <?php echo $form['title']->renderHelp() ?>
-          </div>
-        </div>
         
-        <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_slug">
-          <?php echo $form['slug']->renderLabel() ?>
-          
-          <div class="content">
-            <?php echo $form['slug']->render() ?>
-          </div>
-          
-          <div class="help">
-            <?php echo $form['slug']->renderHelp() ?>
-          </div>
-        </div>
-        
+        <?php if($lang['lang']){ ?>
+          <?php foreach($lang['lang'] as $key => $value){ ?>
+            <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_<?php echo strtolower($value) ?>_title <?php echo strtolower($value) ?>">
+              <?php echo $form[strtolower($value)]['title']->renderLabel() ?>
+
+              <div class="content">
+                <?php echo $form[strtolower($value)]['title']->render() ?>
+              </div>
+
+              <div class="help">
+                <?php echo $form[strtolower($value)]['title']->renderHelp() ?>
+              </div>
+            </div>
+
+            <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_<?php echo strtolower($value) ?>_slug <?php echo strtolower($value) ?>">
+              <?php echo $form[strtolower($value)]['slug']->renderLabel() ?>
+
+              <div class="content">
+                <?php echo $form[strtolower($value)]['slug']->render() ?>
+              </div>
+
+              <div class="help">
+                <?php echo $form[strtolower($value)]['slug']->renderHelp() ?>
+              </div>
+            </div>
+          <?php }}else{ ?>
+            <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_fr_title fr">
+              <?php echo $form['fr']['title']->renderLabel() ?>
+
+              <div class="content">
+                <?php echo $form['fr']['title']->render() ?>
+              </div>
+
+              <div class="help">
+                <?php echo $form['fr']['title']->renderHelp() ?>
+              </div>
+            </div>
+
+            <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_fr_slug fr">
+              <?php echo $form['fr']['slug']->renderLabel() ?>
+
+              <div class="content">
+                <?php echo $form['fr']['slug']->render() ?>
+              </div>
+
+              <div class="help">
+                <?php echo $form['fr']['slug']->renderHelp() ?>
+              </div>
+            </div>
+        <?php } ?>
       </div>
     </fieldset>
   
@@ -50,29 +90,57 @@
       </div>
       
       <div class="content_box_content">
-        <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_content">
-          <?php echo $form['content']->renderLabel() ?>
-          
-          <div class="content">
-            <?php echo $form['content']->render() ?>
-          </div>
-          
-          <div class="help">
-            <?php echo $form['content']->renderHelp() ?>
-          </div>
-        </div>
+        <?php if($lang['lang']){ ?>
+          <?php foreach($lang['lang'] as $key => $value){ ?>
+            <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_<?php echo strtolower($value) ?>_content <?php echo strtolower($value) ?>">
+              <?php echo $form[strtolower($value)]['content']->renderLabel() ?>
+
+              <div class="content">
+                <?php echo $form[strtolower($value)]['content']->render() ?>
+              </div>
+
+              <div class="help">
+                <?php echo $form[strtolower($value)]['content']->renderHelp() ?>
+              </div>
+            </div>
         
-        <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_excerpt">
-          <?php echo $form['excerpt']->renderLabel() ?>
-          
-          <div class="content">
-            <?php echo $form['excerpt']->render() ?>
-          </div>
-          
-          <div class="help">
-            <?php echo $form['excerpt']->renderHelp() ?>
-          </div>
-        </div>
+            <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_<?php echo strtolower($value) ?>_excerpt <?php echo strtolower($value) ?>">
+              <?php echo $form[strtolower($value)]['excerpt']->renderLabel() ?>
+
+              <div class="content">
+                <?php echo $form[strtolower($value)]['excerpt']->render() ?>
+              </div>
+
+              <div class="help">
+                <?php echo $form[strtolower($value)]['excerpt']->renderHelp() ?>
+              </div>
+            </div>
+          <?php }}else{ ?>
+            <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_fr_content fr">
+              <?php echo $form['fr']['content']->renderLabel() ?>
+
+              <div class="content">
+                <?php echo $form['fr']['content']->render() ?>
+              </div>
+
+              <div class="help">
+                <?php echo $form['fr']['content']->renderHelp() ?>
+              </div>
+            </div>
+        
+            <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_fr_excerpt fr">
+              <?php echo $form['fr']['excerpt']->renderLabel() ?>
+
+              <div class="content">
+                <?php echo $form['fr']['excerpt']->render() ?>
+              </div>
+
+              <div class="help">
+                <?php echo $form['fr']['excerpt']->renderHelp() ?>
+              </div>
+            </div>
+        <?php } ?>
+
         
         <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_peanutSeo">
           
@@ -80,30 +148,51 @@
           
           <div class="content">
             <div class="embedForm">
+
+              <?php if($lang['lang']){ ?>
+                <?php foreach($lang['lang'] as $key => $value){ ?>
+                  <div class="form-row <?php echo strtolower($value) ?>">
+                    <?php echo $form['peanutSeo'][strtolower($value)]['title']->renderLabel() ?>
+                    <?php echo $form['peanutSeo'][strtolower($value)]['title']->render() ?>
+                    <div class="help"><?php echo $form['peanutSeo'][strtolower($value)]['title']->renderHelp() ?></div>
+                  </div>
+                <?php }}else{ ?>
+                  <div class="form-row fr">
+                    <?php echo $form['peanutSeo']['fr']['title']->renderLabel() ?>
+                    <?php echo $form['peanutSeo']['fr']['title']->render() ?>
+                    <div class="help"><?php echo $form['peanutSeo']['fr']['title']->renderHelp() ?></div>
+                  </div>  
+              <?php } ?>
               
-              <div class="form-row sf_admin_form_field_peanutSeo_title">
-                <?php echo $form['peanutSeo']['title']->renderLabel() ?>
-                <?php echo $form['peanutSeo']['title']->render() ?>
-                <div class="count">
-                  <span class="counter"><?php echo $form['peanutSeo']['title']->getValue() ? 195 - strlen($form['peanutSeo']['title']->getValue()) : '195'; ?></span> <?php echo __('characters still available.', null, 'peanutCorporate') ?>
-                </div>
-                <div class="help hidden"><?php echo $form['peanutSeo']['title']->renderHelp() ?></div>
-              </div>
-              
-              <div class="form-row sf_admin_form_field_peanutSeo_description">
-                <?php echo $form['peanutSeo']['description']->renderLabel() ?>
-                <?php echo $form['peanutSeo']['description']->render() ?>
-                <div class="count">
-                  <span class="counter"><?php echo $form['peanutSeo']['description']->getValue() ? 255 - strlen($form['peanutSeo']['description']->getValue()) : '255'; ?></span> <?php echo __('characters still available.', null, 'peanutCorporate') ?>
-                </div>
-                <div class="help hidden"><?php echo $form['peanutSeo']['description']->renderHelp() ?></div>
-              </div>
-              
-              <div class="form-row fr sf_admin_form_field_peanutSeo_keywords">
-                <?php echo $form['peanutSeo']['keywords']->renderLabel() ?>
-                <?php echo $form['peanutSeo']['keywords']->render() ?>
-                <div class="help"><?php echo $form['peanutSeo']['keywords']->renderHelp() ?></div>
-              </div>
+              <?php if($lang['lang']){ ?>
+                <?php foreach($lang['lang'] as $key => $value){ ?>
+                  <div class="form-row <?php echo strtolower($value) ?>">
+                    <?php echo $form['peanutSeo'][strtolower($value)]['description']->renderLabel() ?>
+                    <?php echo $form['peanutSeo'][strtolower($value)]['description']->render() ?>
+                    <div class="help"><?php echo $form['peanutSeo'][strtolower($value)]['description']->renderHelp() ?></div>
+                  </div>
+                <?php }}else{ ?>
+                  <div class="form-row fr">
+                    <?php echo $form['peanutSeo']['fr']['description']->renderLabel() ?>
+                    <?php echo $form['peanutSeo']['fr']['description']->render() ?>
+                    <div class="help"><?php echo $form['peanutSeo']['fr']['description']->renderHelp() ?></div>
+                  </div>
+              <?php } ?>
+
+              <?php if($lang['lang']){ ?>
+                <?php foreach($lang['lang'] as $key => $value){ ?>
+                  <div class="form-row <?php echo strtolower($value) ?>">
+                    <?php echo $form['peanutSeo'][strtolower($value)]['keywords']->renderLabel() ?>
+                    <?php echo $form['peanutSeo'][strtolower($value)]['keywords']->render() ?>
+                    <div class="help"><?php echo $form['peanutSeo'][strtolower($value)]['keywords']->renderHelp() ?></div>
+                  </div>
+                <?php }}else{ ?>
+                  <div class="form-row fr">
+                    <?php echo $form['peanutSeo']['fr']['keywords']->renderLabel() ?>
+                    <?php echo $form['peanutSeo']['fr']['keywords']->render() ?>
+                    <div class="help"><?php echo $form['peanutSeo']['fr']['keywords']->renderHelp() ?></div>
+                  </div>
+              <?php } ?>
               
               <div class="form-row">
                 <?php echo $form['peanutSeo']['is_indexable']->renderLabel() ?>
@@ -193,3 +282,5 @@
     <?php include_partial('adminPage/form_actions', array('peanut_page' => $peanut_page, 'form' => $form, 'configuration' => $configuration, 'helper' => $helper)) ?>
   </form>
 </div>
+
+<?php include_partial('settings/cssjslang', array('lang' => $lang)) ?>    

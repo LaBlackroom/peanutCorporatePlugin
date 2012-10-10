@@ -40,7 +40,4 @@ abstract class PluginpeanutXfnForm extends BasepeanutXfnForm
 
     $this->widgetSchema->setFormFormatterName('div');
   }
-  
 }
-
-

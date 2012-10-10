@@ -17,25 +17,25 @@ abstract class PluginpeanutLinkForm extends BasepeanutLinkForm
     $user = self::getValidUser();
     
     $this->useFields(array(
-     'title',
-     'slug',
-     'url',
-     'content',     
      'author',
      'status',
      'menu',
+     'url',
      'created_at'
     ));
-        
-    $this->widgetSchema['url'] = new sfWidgetFormHtml5InputText($options = array(), $attributes = array(
+    
+    $this->widgetSchema['url'] = new sfWidgetFormHtml5InputUrl($options = array(), $attributes = array(
         'required'    => true,
-        'placeholder' => 'http://www.mywebsite.com'        
-    ));
-
-    $this->widgetSchema['content'] = new sfWidgetFormTextarea($options = array(), $attributes = array(
-        'placeholder' => 'Simple description about my link'
+        'placeholder' => 'http://www.mywebsite.com',
+        'pattern'     => 'https?://.+'
     ));
     
+    $this->validatorSchema['url'] = new sfValidatorUrl($options = array(
+      'required'  => true
+    ),$messages = array(
+      'required'  => 'Fill this please'
+    ));
+
     $this->embedRelation('peanutXfn');
     $this->widgetSchema['peanutXfn']->setLabel('XFN');
 
@@ -52,70 +52,24 @@ abstract class PluginpeanutLinkForm extends BasepeanutLinkForm
       unset($this['created_at']);
     }
     
-    $this->validatorSchema['url'] = new sfValidatorUrl($options = array(
-      'required'  => true
-    ),$messages = array(
-      'required'  => 'Fill this please'
-    ));
+    /* Construction des langues du site */
+    $lang = unserialize(peanutConfig::get('lang'));
+    $default = array();
+    
+    if($lang['lang']){
+      foreach($lang['lang'] as $key => $value){
+        $default[$key] = strtolower($value); 
+      } 
+      
+      $this->embedI18n($default);
 
-    $this->widgetSchema['author'] = new sfWidgetFormChoice(array(
-      'choices' => $this->_getUsers()
-    ));
-
-  }
-
-  public function doBind(array $values)
-  {
-    $url = ($values['url'] );
-
-    if(preg_match('#^https?://.+#', $url))
-    {
-      $this->validatorSchema['url'] = new sfValidatorUrl($options = array(
-          'required'  => true
-        ),$messages = array(
-          'required'  => 'Fill this please'
-      ));
-    }
-    elseif(preg_match('#^/.+\.html$#', $url))
-    {
-      $this->validatorSchema['url'] = new sfValidatorPass($options = array(
-        'required'  => true
-      ),$messages = array(
-        'required'  => 'Fill this please'
-      ));
-    }
-
-    if(array_key_exists('peanutXfn', $values))
-    {
-      $values['peanutXfn'] = $this->_clearIfMe($values);
-    }
-
-    parent::doBind($values);
-  }
-
-  protected function _getUsers()
-  {
-    $users = array();
-    $choices = Doctrine::getTable('sfGuardUser')->getUsersWhereGroupIs('2')->execute();
-
-    foreach($choices as $user)
-    {
-      $users[$user->getId()] = $user->getName();
-    }
-
-    return $users;
-  }
-
-  protected function _clearIfMe($values)
-  {
-    if($values['peanutXfn']['me'] == "on") {
-      foreach($values['peanutXfn'] as $key => $val){
-        if($key != "me")
-          $values['peanutXfn'][$key] = null;
+      foreach($default as $lang){
+        $this->widgetSchema->setLabel($lang, 'language-' . $lang);
       }
     }
-
-    return $values['peanutXfn'];
+    else{
+      $this->embedI18n(array('fr'));
+      $this->widgetSchema->setLabel('fr', 'Français');
+    }
   }
-  
 }

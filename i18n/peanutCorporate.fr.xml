@@ -45,24 +45,8 @@
         <target>Voir cette page : %title%</target>
       </trans-unit>
       <trans-unit>
-        <source>View this entry: %title%</source>
-        <target>Voir cette page : %title%</target>
-      </trans-unit>
-      <trans-unit>
-        <source>View this entry: %title%</source>
-        <target>Voir cette page : %title%</target>
-      </trans-unit>
-      <trans-unit>
-        <source>Last entries for user %s</source>
-        <target>Les derniers articles pour l'utilisateur %s</target>
-      </trans-unit>
-      <trans-unit>
-        <source>Last entries for menu %s</source>
-        <target>Les derniers articles pour le menu %s</target>
-      </trans-unit>
-      <trans-unit>
-        <source>Last entries for relation %s</source>
-        <target>Les derniers articles pour la relation %s</target>
+        <source>Last entries for</source>
+        <target>Les derniers articles pour</target>
       </trans-unit>
       <trans-unit>
         <source>Published by</source>
@@ -71,14 +55,6 @@
       <trans-unit>
         <source>Published at</source>
         <target>Publié le</target>
-      </trans-unit>
-      <trans-unit>
-        <source>characters still available.</source>
-        <target>caractères encore disponibles.</target>
-      </trans-unit>
-      <trans-unit>
-        <source>There is no entries for %s</source>
-        <target>Il n'y a pas d'article pour %s.</target>
       </trans-unit>
     </body>
   </file>

@@ -1,6 +1,5 @@
-<?php include_partial('public/header', array('vars' => $varHeader)) ?>
-<article id="page-<?php echo $item['id'] ?>" class="<?php echo $template ?>">
-  
+<article id="page-<?php echo $item['id'] ?>">
+
   <header>
     <h1>
         <a
@@ -18,8 +17,7 @@
 
   <footer>
     <?php include_partial('author', array('author' => $item['sfGuardUser'])) ?>
-    <?php include_partial('date', array('created' => $item['created_at'], 'updated' => $item['updated_at'])) ?>
+    <?php include_partial('date', array('created' => $item['created_at'], 'updated' => $item['updated_at'], 'culture' => $culture)) ?>
   </footer>
 
 </article>
-<?php include_partial('public/footer', array('vars' => $varFooter)) ?>
