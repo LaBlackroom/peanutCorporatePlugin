@@ -17,10 +17,10 @@ abstract class PluginpeanutLinkForm extends BasepeanutLinkForm
     $user = self::getValidUser();
     
     $this->useFields(array(
-     'url',
      'author',
      'status',
      'menu',
+     'url',
      'created_at'
     ));
     
@@ -28,6 +28,12 @@ abstract class PluginpeanutLinkForm extends BasepeanutLinkForm
         'required'    => true,
         'placeholder' => 'http://www.mywebsite.com',
         'pattern'     => 'https?://.+'
+    ));
+    
+    $this->validatorSchema['url'] = new sfValidatorUrl($options = array(
+      'required'  => true
+    ),$messages = array(
+      'required'  => 'Fill this please'
     ));
 
     $this->embedRelation('peanutXfn');
@@ -46,14 +52,24 @@ abstract class PluginpeanutLinkForm extends BasepeanutLinkForm
       unset($this['created_at']);
     }
     
-    $this->validatorSchema['url'] = new sfValidatorUrl($options = array(
-      'required'  => true
-    ),$messages = array(
-      'required'  => 'Fill this please'
-    ));
+    /* Construction des langues du site */
+    $lang = unserialize(peanutConfig::get('lang'));
+    $default = array();
     
-    $this->embedI18n(array('fr', 'en'));
-    $this->widgetSchema->setLabel('fr', 'Français');
-    $this->widgetSchema->setLabel('en', 'English');
+    if($lang['lang']){
+      foreach($lang['lang'] as $key => $value){
+        $default[$key] = strtolower($value); 
+      } 
+      
+      $this->embedI18n($default);
+
+      foreach($default as $lang){
+        $this->widgetSchema->setLabel($lang, 'language-' . $lang);
+      }
+    }
+    else{
+      $this->embedI18n(array('fr'));
+      $this->widgetSchema->setLabel('fr', 'Français');
+    }
   }
 }
