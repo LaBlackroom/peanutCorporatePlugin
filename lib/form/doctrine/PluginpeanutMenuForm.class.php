@@ -13,34 +13,38 @@ abstract class PluginpeanutMenuForm extends BasepeanutMenuForm
   public function setup()
   {
     parent::setup();
-   
-    $this->useFields(array(
-      'name',
-      'slug'
-    ));
     
-    $this->widgetSchema['name'] = new sfWidgetFormHtml5InputText($options = array(), $attributes = array(
-      'required'    => true,
-      'placeholder' => 'My menu'
-    ));
+    $user = self::getValidUser();
+
     
-    $this->widgetSchema['slug'] = new sfWidgetFormHtml5InputText($options = array(), $attributes = array(
-      'placeholder' => 'my-menu'
-    ));
+    /* Construction des langues du site */
+    $lang = unserialize(peanutConfig::get('lang'));
+    $default = array();
     
-    $this->widgetSchema->setHelps(array(
-      'name' => 'The menu name (required)',
-      'slug' => 'Not required but maybe usefull for your SEO'
-    ));
-    
-    /**
+    if($lang['lang']){
+      foreach($lang['lang'] as $key => $value){
+        $default[$key] = strtolower($value); 
+      } 
+      
+      $this->embedI18n($default);
+
+      foreach($default as $lang){
+        $this->widgetSchema->setLabel($lang, 'language-' . $lang);
+      }
+    }
+    else{
+      $this->embedI18n(array('fr'));
+      $this->widgetSchema->setLabel('fr', 'Français');
+    }
+
+     /**
      *
      * NestedSet Menu
      */
      
     $this->widgetSchema['parent'] = new sfWidgetFormDoctrineChoiceNestedSet(array(
       'model'     => 'peanutMenu',
-      'add_empty' => 'This is a first level menu',
+      'add_empty' => sfContext::getInstance()->getI18N()->__('This is a first level menu', null, 'peanutCorporate')
     ));
     
     $this->validatorSchema['parent'] = new sfValidatorDoctrineChoiceNestedSet(array(
@@ -48,6 +52,8 @@ abstract class PluginpeanutMenuForm extends BasepeanutMenuForm
       'model'    => 'peanutMenu',
       'node'     => $this->getObject(),
     ));
+    
+    $this->widgetSchema['parent']->setLabel('Parent menu');
     
     if($this->getObject()->getNode()->hasParent())
     {
