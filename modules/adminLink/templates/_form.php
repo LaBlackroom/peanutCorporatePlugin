@@ -1,3 +1,15 @@
+<?php 
+if($form->isNew() && (!$sf_user->hasPermission('2') && !$sf_user->hasPermission('3')
+   && !$sf_user->hasPermission('4') && !$sf_user->hasPermission('5')))
+{
+  echo '<div class="sorry sf_admin_form">';
+    echo __('Sorry but you can not create link.', null, 'sfGuard');
+  echo '.. Cheater!</div>';
+}
+else
+{
+?>
+  
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
@@ -107,7 +119,7 @@
               </div>
             </div>
         <?php } ?>
-
+        
       </div>
     </fieldset>
   
@@ -342,3 +354,5 @@
 </div>
 
 <?php include_partial('settings/cssjslang', array('lang' => $lang)) ?>   
+
+<?php } ?>
