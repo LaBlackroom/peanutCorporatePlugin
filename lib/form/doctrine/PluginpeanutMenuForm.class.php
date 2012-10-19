@@ -13,6 +13,8 @@ abstract class PluginpeanutMenuForm extends BasepeanutMenuForm
   public function setup()
   {
     parent::setup();
+  
+    $user = self::getValidUser();
 
     /* Construction des langues du site */
     $lang = unserialize(peanutConfig::get('lang'));
@@ -33,15 +35,15 @@ abstract class PluginpeanutMenuForm extends BasepeanutMenuForm
       $this->embedI18n(array('fr'));
       $this->widgetSchema->setLabel('fr', 'Français');
     }
-    
-    /**
+
+     /**
      *
      * NestedSet Menu
      */
      
     $this->widgetSchema['parent'] = new sfWidgetFormDoctrineChoiceNestedSet(array(
       'model'     => 'peanutMenu',
-      'add_empty' => 'This is a first level menu',
+      'add_empty' => sfContext::getInstance()->getI18N()->__('This is a first level menu', null, 'peanutCorporate')
     ));
     
     $this->validatorSchema['parent'] = new sfValidatorDoctrineChoiceNestedSet(array(
@@ -49,6 +51,8 @@ abstract class PluginpeanutMenuForm extends BasepeanutMenuForm
       'model'    => 'peanutMenu',
       'node'     => $this->getObject(),
     ));
+    
+    $this->widgetSchema['parent']->setLabel('Parent menu');
     
     if($this->getObject()->getNode()->hasParent())
     {

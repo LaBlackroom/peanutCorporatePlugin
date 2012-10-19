@@ -30,7 +30,7 @@ class adminItemActions extends autoAdminItemActions
   
   public function executeChangestatus()
   {
-    $object = Doctrine_Core::getTable('peanutItem')->findOneById($this->getRequestParameter('id'));
+    $object = Doctrine_Core::getTable('peanutItem')->findOneById($this->getRequestParameter('id'));   
     $object->changeStatus();
     
     $this->getUser()->setFlash('notice', 'Status was modified successfully');
