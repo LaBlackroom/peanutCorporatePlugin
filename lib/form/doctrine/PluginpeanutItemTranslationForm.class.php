@@ -17,6 +17,7 @@ abstract class PluginpeanutItemTranslationForm extends BasepeanutItemTranslation
     $this->useFields(array(
       'title',
       'slug',
+      'url',
       'content'
     ));
     
@@ -32,7 +33,9 @@ abstract class PluginpeanutItemTranslationForm extends BasepeanutItemTranslation
     $this->widgetSchema->setHelps(array(
       'title'         => 'The item title (required)',
       'slug'          => 'Not required but maybe usefull for your SEO',
-      'content'       => 'The item content (required)'
+      'content'       => 'The item content (required)',
+      'url'           => 'The item url (must be an http or https url)',
+      
     ));
   }
 }

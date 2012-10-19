@@ -17,7 +17,13 @@ abstract class PluginpeanutLinkTranslationForm extends BasepeanutLinkTranslation
     $this->useFields(array(
      'title',
      'slug',
+     'url',
      'content'
+    ));
+    
+    $this->widgetSchema['url'] = new sfWidgetFormHtml5InputText($options = array(), $attributes = array(
+        'required'    => true,
+        'placeholder' => 'http://www.mywebsite.com'
     ));
     
     $this->widgetSchema['title'] = new sfWidgetFormHtml5InputText($options = array(), $attributes = array(

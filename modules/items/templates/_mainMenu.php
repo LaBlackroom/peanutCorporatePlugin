@@ -4,7 +4,7 @@
   <li>
     <?php if($item['type'] == 'link'): ?>
     
-    <a href="<?php echo $item['url'] ?>" title="<?php echo __('Link to %title%', array('%title%' => $item['Translation'][$culture]['title']), 'peanutCorporate') ?>">
+    <a href="<?php echo $item['Translation'][$culture]['url'] ?>" title="<?php echo __('Link to %title%', array('%title%' => $item['Translation'][$culture]['title']), 'peanutCorporate') ?>">
       <?php echo htmlentities($item['Translation'][$culture]['title']) ?>
     </a>
 

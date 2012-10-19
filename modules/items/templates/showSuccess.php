@@ -2,7 +2,7 @@
 <?php seo('description', $item) ?>
 <?php seo('keywords', $item) ?>
 <?php seo('index', $item) ?>
-
+<?php include_partial('public/header', array('vars' => $varHeader)) ?>
 <article id="page-<?php echo $item['id'] ?>">
 
   <header>
@@ -19,3 +19,4 @@
   </footer>
   
 </article>
+<?php include_partial('public/footer', array('vars' => $varFooter)) ?>

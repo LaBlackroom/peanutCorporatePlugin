@@ -20,20 +20,7 @@ abstract class PluginpeanutLinkForm extends BasepeanutLinkForm
      'author',
      'status',
      'menu',
-     'url',
      'created_at'
-    ));
-    
-    $this->widgetSchema['url'] = new sfWidgetFormHtml5InputUrl($options = array(), $attributes = array(
-        'required'    => true,
-        'placeholder' => 'http://www.mywebsite.com',
-        'pattern'     => 'https?://.+'
-    ));
-    
-    $this->validatorSchema['url'] = new sfValidatorUrl($options = array(
-      'required'  => true
-    ),$messages = array(
-      'required'  => 'Fill this please'
     ));
 
     $this->embedRelation('peanutXfn');

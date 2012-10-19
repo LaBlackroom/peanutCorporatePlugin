@@ -1,3 +1,4 @@
+<?php include_partial('public/header', array('vars' => $varHeader)) ?>
 <article id="page-<?php echo $item['id'] ?>">
 
   <header>
@@ -21,3 +22,4 @@
   </footer>
 
 </article>
+<?php include_partial('public/footer', array('vars' => $varFooter)) ?>

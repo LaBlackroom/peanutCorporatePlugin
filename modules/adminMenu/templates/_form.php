@@ -120,12 +120,4 @@
 </div>
 
 <?php include_partial('settings/cssjslang', array('lang' => $lang)) ?>    
-
-
-
-<?php if($lang['lang']){ ?>
-  <?php foreach($lang['lang'] as $key => $value){ ?>
-
-  <?php }}else{ ?>
-
 <?php } ?>

@@ -30,6 +30,7 @@ abstract class PluginpeanutPageTable extends Doctrine_Table
             ->leftJoin('p.Translation t')
             ->leftJoin('p.sfGuardUser s')
             ->leftJoin('p.peanutMenu m')
+            ->leftJoin('m.Translation mt')
             ->leftJoin('p.peanutSeo o')
             ->orderBy('p.position ASC');
     
@@ -81,7 +82,7 @@ abstract class PluginpeanutPageTable extends Doctrine_Table
   public function getItemsByMenu($menu, $status = 'publish', $lang = null)
   {
     $p = $this->getItems($status, $lang)
-            ->andWhere('m.id = ? OR m.slug = ?', array($menu, $menu));
+            ->andWhere('m.id = ? OR mt.slug = ?', array($menu, $menu));
 
     return $p;
   }

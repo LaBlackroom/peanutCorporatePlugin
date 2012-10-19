@@ -13,25 +13,26 @@ abstract class PluginpeanutMenuForm extends BasepeanutMenuForm
   public function setup()
   {
     parent::setup();
-   
-    $this->useFields(array(
-      'name',
-      'slug'
-    ));
+
+    /* Construction des langues du site */
+    $lang = unserialize(peanutConfig::get('lang'));
+    $default = array();
     
-    $this->widgetSchema['name'] = new sfWidgetFormHtml5InputText($options = array(), $attributes = array(
-      'required'    => true,
-      'placeholder' => 'My menu'
-    ));
-    
-    $this->widgetSchema['slug'] = new sfWidgetFormHtml5InputText($options = array(), $attributes = array(
-      'placeholder' => 'my-menu'
-    ));
-    
-    $this->widgetSchema->setHelps(array(
-      'name' => 'The menu name (required)',
-      'slug' => 'Not required but maybe usefull for your SEO'
-    ));
+    if($lang['lang']){
+      foreach($lang['lang'] as $key => $value){
+        $default[$key] = strtolower($value); 
+      } 
+      
+      $this->embedI18n($default);
+
+      foreach($default as $lang){
+        $this->widgetSchema->setLabel($lang, 'language-' . $lang);
+      }
+    }
+    else{
+      $this->embedI18n(array('fr'));
+      $this->widgetSchema->setLabel('fr', 'Français');
+    }
     
     /**
      *

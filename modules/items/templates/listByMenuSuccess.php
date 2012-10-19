@@ -1,5 +1,5 @@
 <?php use_helper('Text') ?>
-
+<?php include_partial('public/header', array('vars' => $varHeader)) ?>
 <section>
 
   <h1><?php echo __('Last entries for') . ' ' . $items[0]['peanutMenu']['name'] ?></h1>
@@ -39,3 +39,4 @@
   <?php endforeach; ?>
 
 </section>
+<?php include_partial('public/footer', array('vars' => $varFooter)) ?>

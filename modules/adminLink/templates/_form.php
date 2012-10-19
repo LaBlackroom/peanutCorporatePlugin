@@ -81,18 +81,33 @@
             </div>
         <?php } ?>
 
-        <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_url">
-          <?php echo $form['url']->renderLabel() ?>
-          
-          <div class="content">
-            <?php echo $form['url']->render() ?>
-          </div>
-          
-          <div class="help">
-            <?php echo $form['url']->renderHelp() ?>
-          </div>
-        </div>
-        
+        <?php if($lang['lang']){ ?>
+          <?php foreach($lang['lang'] as $key => $value){ ?>
+            <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_<?php echo strtolower($value) ?>_url <?php echo strtolower($value) ?>">
+              <?php echo $form[strtolower($value)]['url']->renderLabel() ?>
+
+              <div class="content">
+                <?php echo $form[strtolower($value)]['url']->render() ?>
+              </div>
+
+              <div class="help">
+                <?php echo $form[strtolower($value)]['url']->renderHelp() ?>
+              </div>
+            </div>
+          <?php }}else{ ?>
+            <div class="sf_admin_form_row sf_admin_text sf_admin_form_field_fr_url fr">
+              <?php echo $form['fr']['url']->renderLabel() ?>
+
+              <div class="content">
+                <?php echo $form['fr']['url']->render() ?>
+              </div>
+
+              <div class="help">
+                <?php echo $form['fr']['url']->renderHelp() ?>
+              </div>
+            </div>
+        <?php } ?>
+
       </div>
     </fieldset>
   
