@@ -12,7 +12,7 @@ class itemsComponents extends sfComponents
 {
   public function executeMainMenu(sfWebRequest $request)
   {
-    echo "cultureAA : " . $this->culture = $request->getParameter('sf_culture');
+    $this->culture = $request->getParameter('sf_culture');
     
     $items = Doctrine_Core::getTable('peanutItem')->getItemsByMenu(1, 'publish', $this->culture);
     $this->items = $items->execute(array(), Doctrine_Core::HYDRATE_ARRAY);

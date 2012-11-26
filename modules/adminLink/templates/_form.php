@@ -1,15 +1,3 @@
-<?php 
-if($form->isNew() && (!$sf_user->hasPermission('2') && !$sf_user->hasPermission('3')
-   && !$sf_user->hasPermission('4') && !$sf_user->hasPermission('5')))
-{
-  echo '<div class="sorry sf_admin_form">';
-    echo __('Sorry but you can not create link.', null, 'sfGuard');
-  echo '.. Cheater!</div>';
-}
-else
-{
-?>
-  
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
@@ -119,7 +107,7 @@ else
               </div>
             </div>
         <?php } ?>
-        
+
       </div>
     </fieldset>
   
@@ -316,19 +304,13 @@ else
         <div class="sf_admin_form_row sf_admin_foreignkey sf_admin_form_field_menu">
           <?php echo $form['menu']->renderLabel() ?>
           
-          <div class="content" id="selectmenu">
+          <div class="content">
             <?php echo $form['menu']->render() ?>
-            
-            <a class="ajax" href="/adminMenu/newx">
-              <img title="<?php echo __("Add new menu") ?>" src="/peanutAssetPlugin/images/admin/add.png" />
-            </a>
           </div>
           
-          <div class="help">            
+          <div class="help">
             <?php echo $form['menu']->renderHelp() ?>
           </div>
-          
-          <div id="dialog"></div>
         </div>
         
         <?php if(!$form->isNew()): ?>
@@ -354,5 +336,3 @@ else
 </div>
 
 <?php include_partial('settings/cssjslang', array('lang' => $lang)) ?>   
-
-<?php } ?>
